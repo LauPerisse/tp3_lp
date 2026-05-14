@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Cliente {
     private List<Alquiler> alquileres = new ArrayList<>();
-    private String name;
+    private String nombre;
 
     public Cliente(String nombre) {
-        this.name = nombre;
+        this.nombre = nombre;
     }
 
     public ResumenAlquiler calcularResumen() {
@@ -28,6 +28,6 @@ public class Cliente {
     }
 
     public String nombre() {
-        return name;
+        return nombre;
     }
 }

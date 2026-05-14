@@ -1,8 +1,8 @@
 package Ejercicio1;
 
 public class Alquiler {
-    private CopiaLibro copia;
-    private int diasAlquilados;
+    private final CopiaLibro copia;
+    private final int diasAlquilados;
 
     public Alquiler(CopiaLibro copia, int diasAlquilados) {
         this.copia = copia;
