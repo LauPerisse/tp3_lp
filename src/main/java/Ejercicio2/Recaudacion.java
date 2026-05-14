@@ -6,32 +6,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Recaudacion {
 
     private static final String DATA_PATH = "src/main/resources/data.csv";
 
+    // Filtra los aportes de capital de forma dinámica basándose en el mapa de opciones
+    // para que no haya una serie de if consecutivos
     public static List<Map<String, String>> where(Map<String, String> options) throws IOException {
         List<AporteCapital> todosLosAportes = cargarAportesDesdeCsv(DATA_PATH);
 
-        Stream<AporteCapital> streamAportes = todosLosAportes.stream();
-
-        if (options.containsKey("company_name")) {
-            streamAportes = streamAportes.filter(a -> a.companyName().equals(options.get("company_name")));
-        }
-        if (options.containsKey("city")) {
-            streamAportes = streamAportes.filter(a -> a.city().equals(options.get("city")));
-        }
-        if (options.containsKey("state")) {
-            streamAportes = streamAportes.filter(a -> a.state().equals(options.get("state")));
-        }
-        if (options.containsKey("round")) {
-            streamAportes = streamAportes.filter(a -> a.round().equals(options.get("round")));
-        }
-
-        return streamAportes
+        return todosLosAportes.stream()
                 .map(AporteCapital::toMap)
+                .filter(datosAporte -> options.entrySet().stream()
+                        .allMatch(filtro ->
+                                datosAporte.containsKey(filtro.getKey()) &&
+                                        datosAporte.get(filtro.getKey()).equals(filtro.getValue())
+                        )
+                )
                 .collect(Collectors.toList());
     }
 
