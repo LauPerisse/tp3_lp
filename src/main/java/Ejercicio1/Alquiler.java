@@ -9,19 +9,11 @@ public class Alquiler {
         this.diasAlquilados = diasAlquilados;
     }
 
-    public int diasAlquilados() {
-        return this.diasAlquilados;
+    public double montoAlquiler() {
+        return copia.libro().montoAlquiler(diasAlquilados);
     }
 
-    public CopiaLibro copia() {
-        return this.copia;
-    }
-
-    public int obtnerCodigoLibro () {
-        return this.copia.libro().codigoPrecio();
-    }
-
-    public double calcularMonto () {
-        return this.copia.libro().calcularPrecio(this.diasAlquilados);
+    public int puntosAlquiler() {
+        return copia.libro().puntosAlquiler(diasAlquilados);
     }
 }

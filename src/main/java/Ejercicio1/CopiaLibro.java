@@ -3,12 +3,11 @@ package Ejercicio1;
 public class CopiaLibro {
     private Libro libro;
 
-    public CopiaLibro(Libro unLibro) {
-        this.libro = unLibro;
+    public CopiaLibro(Libro libro) {
+        this.libro = libro;
     }
 
     public Libro libro() {
         return libro;
     }
-
 }

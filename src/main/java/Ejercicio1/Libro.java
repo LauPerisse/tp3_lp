@@ -1,22 +1,19 @@
 package Ejercicio1;
 
-public abstract class Libro {
+public class Libro {
     private String nombre;
-    private int codigoPrecio;
+    private Precio precio;
 
-    public Libro(String nombre, int priceCode) {
+    public Libro(String nombre, Precio precio) {
         this.nombre = nombre;
-        this.codigoPrecio = priceCode;
+        this.precio = precio;
     }
 
-    public int codigoPrecio() {
-        return codigoPrecio;
+    public double montoAlquiler(int diasAlquilados) {
+        return precio.montoAlquiler(diasAlquilados);
     }
 
-    public String nombre() {
-        return nombre;
+    public int puntosAlquiler(int diasAlquilados) {
+        return precio.puntosAlquiler(diasAlquilados);
     }
-
-    public abstract double calcularPrecio (int diasAlquilados);
-
 }
