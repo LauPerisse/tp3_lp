@@ -29,6 +29,6 @@ public class RecaudacionTest {
 
         assertEquals("facebook", row.get("permalink"));
         assertEquals("Facebook", row.get("company_name"));
-        assertEquals("a", row.get("round"));
+        assertEquals("angel", row.get("round"));
     }
 }

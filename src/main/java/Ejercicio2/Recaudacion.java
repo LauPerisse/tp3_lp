@@ -13,23 +13,23 @@ public class Recaudacion {
 
         return todosLosAportes.stream()
                 .filter(aporte -> cumpleConFiltros(aporte, options))
-                .map(Recaudacion::convertirAMap)
+                .map(AporteCapital::toMap)
                 .collect(Collectors.toList());
     }
 
     private static boolean cumpleConFiltros(AporteCapital aporte, Map<String, String> options) {
-        if (options.containsKey("company_name") && !aporte.companyName().equalsIgnoreCase(options.get("company_name"))) return false;
-        if (options.containsKey("city") && !aporte.city().equalsIgnoreCase(options.get("city"))) return false;
-        if (options.containsKey("state") && !aporte.state().equalsIgnoreCase(options.get("state"))) return false;
-        if (options.containsKey("round") && !aporte.round().equalsIgnoreCase(options.get("round"))) return false;
-        return true;
+        Map<String, String> datosAporte = aporte.toMap();
+
+        return options.entrySet().stream()
+                .allMatch(entry -> {
+                    String valorEnAporte = datosAporte.get(entry.getKey());
+                    return valorEnAporte != null && valorEnAporte.equalsIgnoreCase(entry.getValue());
+                });
     }
 
     private static List<AporteCapital> cargarAportesDesdeCsv() throws IOException {
         List<AporteCapital> aportes = new ArrayList<>();
-        InputStream is = null;
-
-        is = Recaudacion.class.getResourceAsStream("/data.csv");
+        InputStream is = Recaudacion.class.getResourceAsStream("/data.csv");
 
         if (is == null) {
             File file = new File("src/main/resources/data.csv");
@@ -42,9 +42,7 @@ public class Recaudacion {
         }
 
         if (is == null) {
-            throw new IOException("ERROR FATAL: No se encontró 'data.csv'. \n" +
-                    "Verifica que el archivo exista en 'src/main/resources/data.csv' \n" +
-                    "y que el nombre sea exactamente 'data.csv' en minúsculas.");
+            throw new IOException("ERROR FATAL: No se encontró 'data.csv'.");
         }
 
         try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(is))
@@ -61,20 +59,5 @@ public class Recaudacion {
             throw new IOException("Error procesando los datos del CSV: " + e.getMessage());
         }
         return aportes;
-    }
-
-    private static Map<String, String> convertirAMap(AporteCapital aporte) {
-        Map<String, String> output = new HashMap<>();
-        output.put("permalink", aporte.permalink());
-        output.put("company_name", aporte.companyName());
-        output.put("number_employees", aporte.numberEmployees());
-        output.put("category", aporte.category());
-        output.put("city", aporte.city());
-        output.put("state", aporte.state());
-        output.put("funded_date", aporte.fundedDate());
-        output.put("raised_amount", aporte.raisedAmount());
-        output.put("raised_currency", aporte.raisedCurrency());
-        output.put("round", aporte.round());
-        return output;
     }
 }
