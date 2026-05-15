@@ -15,10 +15,11 @@ public class Main {
         cliente.alquilar(alquilerElTunel);
         cliente.alquilar(alquilerAntesDelFin);
 
-        Object[] resultado = cliente.calcularDeudaYPuntosObtenidos();
+        ResumenAlquiler resultado = cliente.calcularResumen();
 
         System.out.println("Estado de cuenta para: " + cliente.nombre());
-        System.out.println("Monto total adeudado: $" + resultado[0]);
-        System.out.println("Puntos de alquiler frecuente obtenidos: " + resultado[1]);
+
+        System.out.println("Monto total adeudado: $" + resultado.deudaTotal());
+        System.out.println("Puntos de alquiler frecuente obtenidos: " + resultado.puntosObtenidos());
     }
 }
