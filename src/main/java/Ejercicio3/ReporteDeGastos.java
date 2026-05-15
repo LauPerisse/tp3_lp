@@ -9,7 +9,7 @@ public class ReporteDeGastos {
         int total = 0;
         int gastosDeComida = 0;
 
-        reporte.append("Expenses ").append(proveedor.hoy()).append("\n");
+        reporte.append("Expensas ").append(proveedor.hoy()).append("\n");
 
         for (Gasto gasto : gastos) {
             if (gasto.esComida()) {
