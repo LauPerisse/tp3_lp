@@ -16,14 +16,14 @@ public class Calculador {
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
 
-            float monto = evento.montoPara(actuacion.numberoEspectadores());
-            float creditosDeActuacion = evento.creditosPara(actuacion.numberoEspectadores());
+            float monto = evento.montoPara(actuacion.numeroEspectadores());
+            float creditosDeActuacion = evento.creditosPara(actuacion.numeroEspectadores());
 
             result.append(actuacion.nombreEvento())
                     .append(": ")
                     .append(monto)
                     .append(". Asientos: ")
-                    .append(actuacion.numberoEspectadores())
+                    .append(actuacion.numeroEspectadores())
                     .append("\n");
 
             totalAmount += monto;
