@@ -7,7 +7,6 @@ public class Calculador {
     public String reporte(Factura factura, List<Evento> eventos) {
         float totalAmount = 0;
         float creditos = 0;
-        // Usamos \n explícito para evitar fallos de aserción en Windows
         var result = new StringBuilder("Facturación para " + factura.nombreCliente() + "\n");
 
         for (var actuacion : factura.actuaciones()) {
