@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ReporteDeGastos {
-    public String imprimir(List<Gasto> gastos) {
+    public String imprimir(List<Gasto> gastos, ProveedorDeFecha proveedor) {
         StringBuilder reporte = new StringBuilder();
         int total = 0;
         int gastosDeComida = 0;
 
-        reporte.append("Expenses ").append(LocalDate.now()).append("\n");
+        reporte.append("Expenses ").append(proveedor.hoy()).append("\n");
 
         for (Gasto gasto : gastos) {
             if (gasto.esComida()) {
